@@ -1,0 +1,35 @@
+---
+# tasks file for jdk8-and-maven
+- apt_repository:
+    repo: 'ppa:webupd8team/java'
+
+- shell: |
+    bash -c "debconf-set-selections <<< 'debconf shared/accepted-oracle-license-v1-1 select true'"
+    bash -c "debconf-set-selections <<< 'debconf shared/accepted-oracle-license-v1-1 seen true'"
+
+- name: make sure required packages are installed
+  apt:
+    name: "{{item}}"
+    state: present
+    update_cache: yes
+    with_items:
+      - oracle-java8-installer
+
+# ???
+- template:
+    src: java.sh.j2
+    dest: /etc/profile.d/java.sh
+
+- name: get Maven
+  get_url:
+    url: http://apache-mirror.rbc.ru/pub/apache/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz
+    dest: /tmp/apache-maven-3.5.0-bin.tar.gz
+
+- unarchive:
+    src: /tmp/apache-maven-3.5.0-bin.tar.gz
+    dest: /opt
+    remote_src: yes
+
+- template:
+    src: maven.sh.j2
+    dest: /etc/profile.d/maven.sh
