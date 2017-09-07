@@ -2,6 +2,8 @@
 # tasks file for jdk8-and-maven
 - apt_repository:
     repo: 'ppa:webupd8team/java'
+    # XXX
+    validate_certs: no
 
 - shell: |
     bash -c "debconf-set-selections <<< 'debconf shared/accepted-oracle-license-v1-1 select true'"
@@ -9,11 +11,11 @@
 
 - name: make sure required packages are installed
   apt:
-    name: "{{item}}"
+    name: "{{ item }}"
     state: present
     update_cache: yes
-    with_items:
-      - oracle-java8-installer
+  with_items:
+    - oracle-java8-installer
 
 # ???
 - template:
