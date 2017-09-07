@@ -1,3 +1,0 @@
-export IGNITE_HOME="{{ IGNITE_HOME }}"
-export PATH="$PATH:$IGNITE_HOME/bin"
-
