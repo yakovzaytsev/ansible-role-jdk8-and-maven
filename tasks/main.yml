@@ -24,11 +24,11 @@
 
 - name: get Maven
   get_url:
-    url: http://apache-mirror.rbc.ru/pub/apache/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz
-    dest: /tmp/apache-maven-3.5.0-bin.tar.gz
+    url: http://www-us.apache.org/dist/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
+    dest: /tmp/apache-maven-3.5.2-bin.tar.gz
 
 - unarchive:
-    src: /tmp/apache-maven-3.5.0-bin.tar.gz
+    src: /tmp/apache-maven-3.5.2-bin.tar.gz
     dest: /opt
     remote_src: yes
 
